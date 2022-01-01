@@ -25,8 +25,8 @@ df.delta.lap.times <- lazy_dt(df.lap_times, immutable = FALSE) %>%
     filter(time.delta < 10 & time.delta > -10, season >= Year) %>% 
     select(c(circuit_id, driver, time.delta, season)) %>% 
     filter(driver == "hamilton" | driver == "max_verstappen") %>% 
-    na.omit() %>% 
-    as_tibble()
+    as_tibble() %>% 
+    na.omit()
 
 p <- df.delta.lap.times %>% 
     ggplot(aes(x = time.delta, y = driver, fill = circuit_id)) + 
@@ -69,8 +69,8 @@ df.avg.race.pace <- lazy_dt(df.lap_times, immutable = FALSE) %>%
     select(c(circuit_id, driver, lap_time, season)) %>% 
     filter(driver == "hamilton" | driver == "max_verstappen") %>% 
     group_by(season, circuit_id, driver) %>% 
-    na.omit() %>% 
-    as_tibble()
+    as_tibble() %>% 
+    na.omit()
 
 # obtain the 95% CI for each driver for each race for each season
 df.CI <- df.avg.race.pace %>% 
